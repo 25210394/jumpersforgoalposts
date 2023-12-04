@@ -1,9 +1,7 @@
-package jumpersforgoalposts;
-
 import javax.swing.*;
 import java.awt.*;
 
-// A class representing Coachs, with attributes specific to their role.
+// A class representing Coaches, with attributes specific to their role.
 
 public class Coach extends Individual {
 

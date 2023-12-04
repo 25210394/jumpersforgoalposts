@@ -1,5 +1,3 @@
-package jumpersforgoalposts;
-
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
@@ -31,11 +29,11 @@ public class FootballLeagueAppGUI {
     private Map<String, Player> homeSelectedPlayers = new HashMap<>();
 
     public FootballLeagueAppGUI() {
-        teams = new ArrayList<>();  // Initialize the list of teams
-        players = new ArrayList<>(); // Initialize the list of players
-        coaches = new ArrayList<>(); // Initialize the list of coaches
-        referees = new ArrayList<>(); // Initialize the list of referees
-        matches = new ArrayList<>(); // Initialize the list of matches
+        teams = new ArrayList<>();  // Initialise the list of teams
+        players = new ArrayList<>(); // Initialise the list of players
+        coaches = new ArrayList<>(); // Initialise the list of coaches
+        referees = new ArrayList<>(); // Initialise the list of referees
+        matches = new ArrayList<>(); // Initialise the list of matches
 
         // Calling method to add players to teams during initialisation
         DataInitializer.initializeTeamsAndPlayers(teams, players);
@@ -58,32 +56,32 @@ public class FootballLeagueAppGUI {
     public void showMainMenu() {
         frame = new JFrame("Football League App");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(800, 600);
+        frame.setSize(1600, 800);
         frame.setLayout(new BorderLayout());
     
         // Set resizable to false
         frame.setResizable(false);
+        frame.setLocationRelativeTo(null); // Center the frame
     
         JPanel mainMenuPanel = new JPanel();
         mainMenuPanel.setLayout(new GridLayout(2, 4));
     
-        JButton profileViewer = new JButton("Profile Viewer");
-        try {
-            // Use getClass().getResource() to load the image
-            ImageIcon icon = new ImageIcon(getClass().getResource("/images/magnifyingglass.png"));
-            profileViewer.setIcon(icon);
-        } catch (Exception e) {
-            e.printStackTrace();
-            // Handle the exception (e.g., show a default icon or a placeholder)
-        }
-        
-        JButton teamViewer = new JButton("Team Viewer");
-        JButton leagueViewer = new JButton("League Viewer");
-        JButton playerCreator = new JButton("Player Creator");
-        JButton teamCreator = new JButton("Team Creator");
-        JButton matchRecorder = new JButton("Match Recorder");
-        JButton teamEditor = new JButton("Team Editor");
-        JButton matchViewer = new JButton("Match Viewer");
+        JButton profileViewer = new JButton();
+        profileViewer.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("/images/playerSearch.png")).getImage().getScaledInstance(200, 200, Image.SCALE_SMOOTH)));
+        JButton teamViewer = new JButton();
+        teamViewer.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("/images/teamViewer.png")).getImage().getScaledInstance(200, 200, Image.SCALE_SMOOTH)));
+        JButton leagueViewer = new JButton();
+        leagueViewer.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("/images/leagueViewer.png")).getImage().getScaledInstance(200, 200, Image.SCALE_SMOOTH)));
+        JButton playerCreator = new JButton();
+        playerCreator.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("/images/playerCreator.png")).getImage().getScaledInstance(200, 200, Image.SCALE_SMOOTH)));
+        JButton teamCreator = new JButton();
+        teamCreator.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("/images/teamCreator.png")).getImage().getScaledInstance(200, 200, Image.SCALE_SMOOTH)));
+        JButton matchRecorder = new JButton();
+        matchRecorder.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("/images/matchRecorder.png")).getImage().getScaledInstance(200, 200, Image.SCALE_SMOOTH)));
+        JButton teamEditor = new JButton();
+        teamEditor.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("/images/teamEditor.png")).getImage().getScaledInstance(200, 200, Image.SCALE_SMOOTH)));
+        JButton matchViewer = new JButton();
+        matchViewer.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("/images/matchViewer.png")).getImage().getScaledInstance(200, 200, Image.SCALE_SMOOTH)));
 
         // Main menu action listeners
 
@@ -161,6 +159,7 @@ public class FootballLeagueAppGUI {
         JDialog dialog = new JDialog(frame, "Add Player", true);
         dialog.setSize(300, 200);
         dialog.setLayout(new GridLayout(2, 1));
+        dialog.setLocationRelativeTo(null); // Center the frame
 
         // Add buttons for different types of individuals
         JButton addPlayerButton = new JButton("Add Player");
@@ -226,6 +225,7 @@ public class FootballLeagueAppGUI {
         JDialog dialog = new JDialog(frame, "Team Creator", true);
         dialog.setSize(300, 200);
         dialog.setLayout(new GridLayout(2, 1));
+        dialog.setLocationRelativeTo(null); // Center the frame
 
         // Add buttons for different team-related options (if needed)
         JButton addTeamButton = new JButton("Create Team");
@@ -264,6 +264,7 @@ public class FootballLeagueAppGUI {
         teamViewerFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         teamViewerFrame.setSize(1000, 300);
         teamViewerFrame.setLayout(new GridLayout(3, 1));
+        teamViewerFrame.setLocationRelativeTo(null); // Center the frame
 
         // Create buttons for each team
         for (Team team : teams) {
@@ -286,6 +287,7 @@ public class FootballLeagueAppGUI {
         JFrame profileViewerFrame = new JFrame("Profile Viewer");
         profileViewerFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         profileViewerFrame.setLayout(new BorderLayout());
+        profileViewerFrame.setLocationRelativeTo(null); // Center the frame
     
         // Create a panel to hold the search bar and player buttons
         JPanel mainPanel = new JPanel(new BorderLayout());
@@ -303,7 +305,7 @@ public class FootballLeagueAppGUI {
     
         // Create buttons for each player
         for (Player player : players) {
-            JButton playerButton = new JButton(player.getName() + "(Player)");
+            JButton playerButton = new JButton(player.getName() + " (Player)");
             playerButton.addActionListener(e -> player.displayPlayerDetailsInDialog());
             playerPanel.add(playerButton);
         }
@@ -347,7 +349,7 @@ public class FootballLeagueAppGUI {
         // Iterate through players
         for (Player player : players) {
             if (player.getName().toLowerCase().contains(searchText.toLowerCase())) {
-                JButton playerButton = new JButton(player.getName());
+                JButton playerButton = new JButton(player.getName() + " (Player)");
                 playerButton.addActionListener(e -> player.displayPlayerDetailsInDialog());
                 filteredPlayerPanel.add(playerButton);
             }
@@ -384,6 +386,7 @@ public class FootballLeagueAppGUI {
         teamViewerFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         teamViewerFrame.setSize(1000, 300);
         teamViewerFrame.setLayout(new GridLayout(3, 1));
+        teamViewerFrame.setLocationRelativeTo(null); // Center the frame
 
         // Create buttons for each team
         for (Team team : teams) {
@@ -405,6 +408,7 @@ public class FootballLeagueAppGUI {
         JDialog dialog = new JDialog((Frame) null, "Team Editor", true);
         dialog.setSize(200, 100);
         dialog.setLayout(new GridLayout(2, 1));
+        dialog.setLocationRelativeTo(null); // Center the frame
     
         JButton addPlayerButton = new JButton("Add Player");
         JButton deletePlayerButton = new JButton("Remove Player");
@@ -612,6 +616,7 @@ public class FootballLeagueAppGUI {
         JFrame profileViewerFrame = new JFrame("Delete Individual");
         profileViewerFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         profileViewerFrame.setLayout(new BorderLayout());
+        profileViewerFrame.setLocationRelativeTo(null); // Center the frame
     
         // Create a panel to hold the search bar and player buttons
         JPanel mainPanel = new JPanel(new BorderLayout());
@@ -736,6 +741,7 @@ public class FootballLeagueAppGUI {
         JDialog dialog = new JDialog(frame, "Delete Team", true);
         dialog.setSize(1000, 300);
         dialog.setLayout(new GridLayout(3, 1));
+        dialog.setLocationRelativeTo(null); // Center the frame
     
         // Create buttons for each team
         for (Team team : teams) {
@@ -765,6 +771,7 @@ public class FootballLeagueAppGUI {
     public void showMatchRecorder() {
         JDialog dialog = new JDialog((Frame) null, "Match Recorder", true);
         dialog.setSize(900, 500);
+        dialog.setLocationRelativeTo(null); // Center the frame
     
         // Input fields
         JFormattedTextField dateField = createDateField();
@@ -1079,6 +1086,7 @@ public class FootballLeagueAppGUI {
         matchViewerFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         matchViewerFrame.setSize(400, 300);
         matchViewerFrame.setLayout(new FlowLayout());
+        matchViewerFrame.setLocationRelativeTo(null); // Center the frame
 
         // Create buttons for each team
         for (Match match : matches) {
@@ -1087,8 +1095,7 @@ public class FootballLeagueAppGUI {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     // Call method for displaying the team details
-                    match.displayMatchDetailsInDialog(homeSelectedPlayers);
-                    match.displayMatchDetailsInDialog(awaySelectedPlayers);
+                    match.displayMatchDetailsInDialog(homeSelectedPlayers, awaySelectedPlayers);
                 }
             });
 
@@ -1102,6 +1109,7 @@ public class FootballLeagueAppGUI {
         JFrame frame = new JFrame("League Table");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setSize(600, 400);
+        frame.setLocationRelativeTo(null); // Center the frame
 
         JTable table = createLeagueTable();
         JScrollPane scrollPane = new JScrollPane(table);
@@ -1122,7 +1130,12 @@ public class FootballLeagueAppGUI {
         }
     
         DefaultTableModel model = new DefaultTableModel(data, columnNames) {
-            @Override
+            /**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
+			@Override
             public boolean isCellEditable(int row, int column) {
                 return false;
             }

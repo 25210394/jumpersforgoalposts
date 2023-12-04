@@ -1,5 +1,3 @@
-package jumpersforgoalposts;
-
 public class MatchEvent {
 
     // Attributes

@@ -1,5 +1,3 @@
-package jumpersforgoalposts;
-
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
@@ -88,6 +86,7 @@ public class Team {
         JDialog dialog = new JDialog((Frame) null, "Team Details", true);
         dialog.setSize(300, 200);
         dialog.setLayout(new GridLayout(4, 1));
+        dialog.setLocationRelativeTo(null); // Center the frame
 
         // Add labels for team details
         JLabel nameLabel = new JLabel("Team Name: " + teamName);

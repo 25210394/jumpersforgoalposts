@@ -1,5 +1,3 @@
-package jumpersforgoalposts;
-
 // A class for recording individuals and inheritance for other classes
 
 public abstract class Individual {

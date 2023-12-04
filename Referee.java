@@ -1,5 +1,3 @@
-package jumpersforgoalposts;
-
 import javax.swing.*;
 import java.awt.*;
 

@@ -1,5 +1,3 @@
-package jumpersforgoalposts;
-
 import java.util.List;
 import java.util.Map;
 import javax.swing.*;
@@ -41,20 +39,23 @@ public class Match {
     }
 
     // Display match details in a dialog
-    public void displayMatchDetailsInDialog(Map<String, Player> selectedPlayers) {
+    public void displayMatchDetailsInDialog(Map<String, Player> homeSelectedPlayers, Map<String, Player> awaySelectedPlayers) {
 
         // Create a dialog window
         JDialog dialog = new JDialog((Frame) null, "Match Details", true);
         dialog.setSize(1000, 1000);
-        dialog.setLayout(new GridLayout(7, 1));
+        dialog.setLayout(new GridLayout(5, 2));
+        dialog.setLocationRelativeTo(null); // Center the frame
 
         // Add labels for team details
         JLabel dateLabel = new JLabel("Date: " + date);
         JLabel scoreLabel = new JLabel("Score: " + score);
         JLabel homeTeamLabel = new JLabel("Home Team: " + homeTeam.getName());
         JLabel awayTeamLabel = new JLabel("Away Team: " + awayTeam.getName());
-        JLabel homeLineupLabel = new JLabel("Home Lineup: " + homeLineup);
-        JLabel awayLineupLabel = new JLabel("Away Lineup: " + awayLineup);
+        String homeLineupText = "<html><b>Home Lineup:</b><br>" + formatLineup(homeLineup) + "</html>";
+        String awayLineupText = "<html><b>Away Lineup:</b><br>" + formatLineup(awayLineup) + "</html>";
+        JLabel homeLineupLabel = new JLabel(homeLineupText);
+        JLabel awayLineupLabel = new JLabel(awayLineupText);
 
         // Add labels to the dialog
         dialog.add(dateLabel);
@@ -65,30 +66,44 @@ public class Match {
         dialog.add(awayLineupLabel);
 
         // Display goalscorers
-        JLabel goalscorersLabel = new JLabel("Goalscorers:");
-        dialog.add(goalscorersLabel);
+        StringBuilder goalscorersText = new StringBuilder("<html><b>Goalscorers:</b><br>");
         for (MatchEvent goal : goalscorers) {
-            JLabel goalLabel = new JLabel(goal.getPlayer().getName() + " - " + goal.getTime());
-            dialog.add(goalLabel);
+            goalscorersText.append(goal.getPlayer().getName()).append(" - ").append(goal.getTime()).append("<br>");
         }
+        goalscorersText.append("</html>");
+
+        JLabel goalscorersLabel = new JLabel(goalscorersText.toString());
+        dialog.add(goalscorersLabel);
 
         // Display substitutions
-        JLabel substitutionsLabel = new JLabel("Substitutions:");
-        dialog.add(substitutionsLabel);
+        StringBuilder substitutionsText = new StringBuilder("<html><b>Substitutions:</b><br>");
         for (MatchEvent substitution : substitutions) {
-            JLabel substitutionLabel = new JLabel(substitution.getPlayer().getName() + " - " + substitution.getTime());
-            dialog.add(substitutionLabel);
+            substitutionsText.append(substitution.getPlayer().getName()).append(" - ").append(substitution.getTime()).append("<br>");
         }
+        substitutionsText.append("</html>");
+
+        JLabel substitutionsLabel = new JLabel(substitutionsText.toString());
+        dialog.add(substitutionsLabel);
 
         // Display cards
-        JLabel cardsLabel = new JLabel("Cards:");
-        dialog.add(cardsLabel);
+        StringBuilder cardsText = new StringBuilder("<html><b>Cards:</b><br>");
         for (MatchEvent card : cards) {
-            JLabel cardLabel = new JLabel(card.getPlayer().getName() + " - " + card.getTime());
-            dialog.add(cardLabel);
+            cardsText.append(card.getPlayer().getName()).append(" - ").append(card.getTime()).append("<br>");
         }
+        cardsText.append("</html>");
+
+        JLabel cardsLabel = new JLabel(cardsText.toString());
+        dialog.add(cardsLabel);
 
         // Set the dialog to be visible
         dialog.setVisible(true);
+    }
+
+    private String formatLineup(Map<String, Player> lineup) {
+        StringBuilder formattedLineup = new StringBuilder();
+        for (Map.Entry<String, Player> entry : lineup.entrySet()) {
+            formattedLineup.append(entry.getKey()).append(": ").append(entry.getValue()).append("<br>");
+        }
+        return formattedLineup.toString();
     }
 }

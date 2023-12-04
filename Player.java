@@ -1,5 +1,3 @@
-package jumpersforgoalposts;
-
 import javax.swing.*;
 import java.awt.*;
 
@@ -74,6 +72,7 @@ public class Player extends Individual {
         JDialog dialog = new JDialog((Frame) null, "Player Details", true);
         dialog.setSize(300, 200);
         dialog.setLayout(new GridLayout(4, 1));
+        dialog.setLocationRelativeTo(null); // Center the frame
 
         // Add labels for team details
         JLabel nameLabel = new JLabel("Name: " + name);
